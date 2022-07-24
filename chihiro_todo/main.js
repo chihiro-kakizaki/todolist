@@ -1,5 +1,8 @@
 const taskSubmitButton = document.querySelector('#task_submit');
-const taskArea = document.querySelector('#task_area');
+const todoArea = document.querySelector('#todo_area');
+const doingArea = document.querySelector('#doing_area');
+const doneArea = document.querySelector('#done_area');
+
 
 // taskをデータとして管理する変数
 let taskList = [];
@@ -7,7 +10,7 @@ let taskList = [];
 // タスクを追加する関数
 const addTask = (newTask) => {
     if(newTask === '') return; // 何も入力されてなかったら処理終了
-    taskList.push(newTask); // 新しいタスクを配列の最後に追加
+    taskList.push({ title:newTask, status:0}); // 新しいタスクを配列の最後に追加
     renderTaskList(); // htmlとして表示する
 }
 
@@ -17,11 +20,52 @@ const deleteTask = (index) => {
     renderTaskList(); // htmlとして表示する
 }
 
+//タスクのステータスをtodoにする関数
+const todoTask = (index) => {
+    taskList[index].status = 0;
+    renderTaskList();
+}
+
+//タスクのステータスをdoingにする関数
+const doingTask = (index) => {
+    taskList[index].status = 1;
+    renderTaskList();
+}
+
+//タスクのステータスをdoneにする関数
+const doneTask = (index) => {
+    taskList[index].status = 2;
+    renderTaskList();
+}
+
 // タスクリストをhtml要素にしてul要素配下に挿入する
 const renderTaskList = () => {
-    const htmlArray = taskList.map((task, i) => `<li>${task}<button onclick="deleteTask(${i})">delete</button></li>`); // 各taskに対してli要素の配列を作成
+    const htmlArray = taskList.map((task, i) => {
+        if (task.status === 0) {
+            return `<li>${task.title}<button onclick="deleteTask(${i})">delete</button><div><button onclick="doingTask(${i})">doing</button><button onclick="doneTask(${i})">done</button></li></div>`//各taskに対してli要素の配列を作成
+        }
+        return "";
+    });
     const html = htmlArray.join(''); // stringの配列を一つの文字列として結合する
-    taskArea.innerHTML = html; // taskArea(ul要素)の子要素として挿入（全上書き）
+    todoArea.innerHTML = html; // taskArea(ul要素)の子要素として挿入（全上書き）
+
+    const doinghtmlArray = taskList.map((task, i) => {
+        if (task.status === 1) {
+            return `<li>${task.title}<button onclick="deleteTask(${i})">delete</button><div><button onclick="todoTask(${i})">todo</button><button onclick="doneTask(${i})">done</button></li></div>`
+        }
+        return "";
+    });
+    const doinghtml = doinghtmlArray.join('');
+    doingArea.innerHTML = doinghtml;
+
+    const donehtmlArray = taskList.map((task, i) => {
+        if (task.status === 2) {
+            return `<li>${task.title}<button onclick="deleteTask(${i})">delete</button><div><button onclick="todoTask(${i})">todo</button><button onclick="doingTask(${i})">doing</button></li></div>`
+        }
+        return "";
+    });
+    const donehtml = donehtmlArray.join('');
+    doneArea.innerHTML = donehtml;
 }
 
 taskSubmitButton.addEventListener('click', function() {
