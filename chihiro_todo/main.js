@@ -40,32 +40,26 @@ const doneTask = (index) => {
 
 // タスクリストをhtml要素にしてul要素配下に挿入する
 const renderTaskList = () => {
-    const htmlArray = taskList.map((task, i) => {
+    todoArea.innerHTML = taskList.map((task, i) => {
         if (task.status === 0) {
             return `<li>${task.title}<button onclick="deleteTask(${i})">delete</button><div><button onclick="doingTask(${i})">doing</button><button onclick="doneTask(${i})">done</button></li></div>`//各taskに対してli要素の配列を作成
         }
         return "";
-    });
-    const html = htmlArray.join(''); // stringの配列を一つの文字列として結合する
-    todoArea.innerHTML = html; // taskArea(ul要素)の子要素として挿入（全上書き）
+    }).join('');
 
-    const doinghtmlArray = taskList.map((task, i) => {
+    doingArea.innerHTML = taskList.map((task, i) => {
         if (task.status === 1) {
             return `<li>${task.title}<button onclick="deleteTask(${i})">delete</button><div><button onclick="todoTask(${i})">todo</button><button onclick="doneTask(${i})">done</button></li></div>`
         }
-        return "";
-    });
-    const doinghtml = doinghtmlArray.join('');
-    doingArea.innerHTML = doinghtml;
+        return "";            
+    }).join('');
 
-    const donehtmlArray = taskList.map((task, i) => {
+    doneArea .innerHTML = taskList.map((task, i) => {
         if (task.status === 2) {
             return `<li>${task.title}<button onclick="deleteTask(${i})">delete</button><div><button onclick="todoTask(${i})">todo</button><button onclick="doingTask(${i})">doing</button></li></div>`
         }
         return "";
-    });
-    const donehtml = donehtmlArray.join('');
-    doneArea.innerHTML = donehtml;
+    }).join('');            
 }
 
 taskSubmitButton.addEventListener('click', function() {
