@@ -3,13 +3,14 @@ const todoArea = document.querySelector('#todo_area');
 const doingArea = document.querySelector('#doing_area');
 const doneArea = document.querySelector('#done_area');
 const selectedPersonId = document.querySelector('#person_select');
+const personSubmitButton = document.querySelector('#person_submit')
 
 
 // taskをデータとして管理する変数
 let taskList = [];
 
 //担当者をデータとして管理する変数
-const personList = [{ id: "1", name: "柿崎"}, {id: "2", name: "柴田"}, {id: "3", name: "黒澤"}];
+let personList = [{ id: "1", name: "柿崎"}, {id: "2", name: "柴田"}, {id: "3", name: "黒澤"}];
 
 //プルダウンで選択された担当者と一致するidをpersonListから探し出し、担当者名で返却する関数
 const getPersonNameById = (personId) => {
@@ -22,6 +23,13 @@ const addTask = function(newTask, selectedPersonId) {
     taskList.push({ title:newTask, status:0, personId: selectedPersonId
     }); // 新しいタスクを配列の最後に追加
     renderTaskList(); // htmlとして表示する
+}
+
+// 担当者を追加する関数
+const addPerson = function(newPersonId, newPersonName) {
+    personList.push({ id: newPersonId, name: newPersonName
+    });
+    renderSelectPersonBox();
 }
 
 // タスクを削除する関数
@@ -48,6 +56,7 @@ const doneTask = (index) => {
     renderTaskList();
 }
 
+// 担当者のセレクトボックスをhtml要素にしてselect要素下に挿入
 const renderSelectPersonBox = () => {
     selectedPersonId.innerHTML = personList.map((person) => {
         return `<option value=${person.id}>${person.name}</option>`
@@ -85,3 +94,13 @@ taskSubmitButton.addEventListener('click', function() {
 });
 
 renderSelectPersonBox();
+
+personSubmitButton.addEventListener('click', function() {
+    const newPersonId = new Date().getTime().toString();
+    const newPersonName = document.querySelector('#person_name');
+    addPerson(newPersonId, newPersonName.value);
+    newPersonName.value = '';
+});
+
+
+
