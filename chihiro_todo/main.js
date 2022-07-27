@@ -3,7 +3,8 @@ const todoArea = document.querySelector('#todo_area');
 const doingArea = document.querySelector('#doing_area');
 const doneArea = document.querySelector('#done_area');
 const selectedPersonId = document.querySelector('#person_select');
-const personSubmitButton = document.querySelector('#person_submit')
+const personSubmitButton = document.querySelector('#person_submit');
+const personListArea = document.querySelector('#person_list_area');
 
 
 // taskをデータとして管理する変数
@@ -31,6 +32,7 @@ const addPerson = function(newPersonName) {
     personList.push({ id: new Date().getTime().toString(), name: newPersonName
     });
     renderSelectPersonBox();
+    renderPersonList();
 }
 
 // タスクを削除する関数
@@ -88,6 +90,11 @@ const renderTaskList = () => {
     }).join('');            
 }
 
+const renderPersonList = () => {
+    personListArea.innerHTML = personList.map((person, i) => {
+        return `<li>${person.name}</li>`
+    }).join('');
+} 
 taskSubmitButton.addEventListener('click', function() {
     const newTask = document.querySelector('#task_value');
     addTask(newTask.value, selectedPersonId.value);
@@ -100,4 +107,8 @@ personSubmitButton.addEventListener('click', function() {
     const newPersonName = document.querySelector('#person_name');
     addPerson(newPersonName.value);
     newPersonName.value = '';
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderPersonList();
 });
