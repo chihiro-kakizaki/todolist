@@ -47,12 +47,10 @@ const doneTask = (index) => {
 }
 
 const renderSelectPersonBox = () => {
-    for (let person of personList) {
-        let op = document.createElement("option");
-        op.value = person.id;
-        op.text = person.name;
-        document.querySelector("#person_select").appendChild(op);
-    }
+    const selectPerson = document.querySelector('#person_select');
+    selectPerson.innerHTML = personList.map((person, i) => {
+        return `<option value=${person.id}>${person.name}</option>`
+    });
 };
 
 // タスクリストをhtml要素にしてul要素配下に挿入する
