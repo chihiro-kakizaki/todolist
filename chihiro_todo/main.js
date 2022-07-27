@@ -2,7 +2,6 @@ const taskSubmitButton = document.querySelector('#task_submit');
 const todoArea = document.querySelector('#todo_area');
 const doingArea = document.querySelector('#doing_area');
 const doneArea = document.querySelector('#done_area');
-const personArea = document.querySelector('#person_area');
 
 
 // taskをデータとして管理する変数
@@ -47,6 +46,15 @@ const doneTask = (index) => {
     renderTaskList();
 }
 
+const renderSelectPersonBox = () => {
+    for (let person of personList) {
+        let op = document.createElement("option");
+        op.value = person.id;
+        op.text = person.name;
+        document.querySelector("#person_select").appendChild(op);
+    }
+};
+
 // タスクリストをhtml要素にしてul要素配下に挿入する
 const renderTaskList = () => {
     todoArea.innerHTML = taskList.map((task, i) => {
@@ -77,3 +85,5 @@ taskSubmitButton.addEventListener('click', function() {
     addTask(newTask.value, selectPerson.value);
     newTask.value = '';
 });
+
+renderSelectPersonBox();
