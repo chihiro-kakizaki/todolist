@@ -66,6 +66,13 @@ const renderSelectPersonBox = () => {
     });
 };
 
+//担当者を削除する関数
+const deletePerson = (index) => {
+    personList = personList.filter((_, i) => i !== index);
+    renderSelectPersonBox();
+    renderPersonList();
+}
+
 // タスクリストをhtml要素にしてul要素配下に挿入する
 const renderTaskList = () => {
     todoArea.innerHTML = taskList.map((task, i) => {
@@ -92,7 +99,7 @@ const renderTaskList = () => {
 
 const renderPersonList = () => {
     personListArea.innerHTML = personList.map((person, i) => {
-        return `<li>${person.name}</li>`
+        return `<li>${person.name}<button onclick="deletePerson(${i})">delete</li>`
     }).join('');
 } 
 taskSubmitButton.addEventListener('click', function() {
