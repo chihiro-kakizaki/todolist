@@ -2,6 +2,7 @@ const taskSubmitButton = document.querySelector('#task_submit');
 const todoArea = document.querySelector('#todo_area');
 const doingArea = document.querySelector('#doing_area');
 const doneArea = document.querySelector('#done_area');
+const selectPerson = document.querySelector('#person_select');
 
 
 // taskをデータとして管理する変数
@@ -16,9 +17,10 @@ const getPersonNameById = (personId) => {
 }
 
 // タスクを追加する関数
-const addTask = function(newTask, selectPerson) {
+const addTask = function(newTask, selectedPersonId) {
     if(newTask === '') return; // 何も入力されてなかったら処理終了
-    taskList.push({ title:newTask, status:0, personId: selectPerson}); // 新しいタスクを配列の最後に追加
+    taskList.push({ title:newTask, status:0, personId: selectedPersonId
+    }); // 新しいタスクを配列の最後に追加
     renderTaskList(); // htmlとして表示する
 }
 
@@ -47,8 +49,7 @@ const doneTask = (index) => {
 }
 
 const renderSelectPersonBox = () => {
-    const selectPerson = document.querySelector('#person_select');
-    selectPerson.innerHTML = personList.map((person, i) => {
+    selectPerson.innerHTML = personList.map((person) => {
         return `<option value=${person.id}>${person.name}</option>`
     });
 };
@@ -79,7 +80,6 @@ const renderTaskList = () => {
 
 taskSubmitButton.addEventListener('click', function() {
     const newTask = document.querySelector('#task_value');
-    const selectPerson = document.querySelector('#person_select');
     addTask(newTask.value, selectPerson.value);
     newTask.value = '';
 });
