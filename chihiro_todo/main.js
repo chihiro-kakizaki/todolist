@@ -27,6 +27,7 @@ const addTask = function(newTask, selectedPersonId) {
 
 // 担当者を追加する関数
 const addPerson = function(newPersonName) {
+    if(newPersonName === '') return;
     personList.push({ id: new Date().getTime().toString(), name: newPersonName
     });
     renderSelectPersonBox();
