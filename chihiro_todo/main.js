@@ -2,7 +2,7 @@ const taskSubmitButton = document.querySelector('#task_submit');
 const todoArea = document.querySelector('#todo_area');
 const doingArea = document.querySelector('#doing_area');
 const doneArea = document.querySelector('#done_area');
-const selectPerson = document.querySelector('#person_select');
+const selectedPersonId = document.querySelector('#person_select');
 
 
 // taskをデータとして管理する変数
@@ -49,7 +49,7 @@ const doneTask = (index) => {
 }
 
 const renderSelectPersonBox = () => {
-    selectPerson.innerHTML = personList.map((person) => {
+    selectedPersonId.innerHTML = personList.map((person) => {
         return `<option value=${person.id}>${person.name}</option>`
     });
 };
@@ -80,7 +80,7 @@ const renderTaskList = () => {
 
 taskSubmitButton.addEventListener('click', function() {
     const newTask = document.querySelector('#task_value');
-    addTask(newTask.value, selectPerson.value);
+    addTask(newTask.value, selectedPersonId.value);
     newTask.value = '';
 });
 
