@@ -26,8 +26,8 @@ const addTask = function(newTask, selectedPersonId) {
 }
 
 // 担当者を追加する関数
-const addPerson = function(newPersonId, newPersonName) {
-    personList.push({ id: newPersonId, name: newPersonName
+const addPerson = function(newPersonName) {
+    personList.push({ id: new Date().getTime().toString(), name: newPersonName
     });
     renderSelectPersonBox();
 }
@@ -96,11 +96,7 @@ taskSubmitButton.addEventListener('click', function() {
 renderSelectPersonBox();
 
 personSubmitButton.addEventListener('click', function() {
-    const newPersonId = new Date().getTime().toString();
     const newPersonName = document.querySelector('#person_name');
-    addPerson(newPersonId, newPersonName.value);
+    addPerson(newPersonName.value);
     newPersonName.value = '';
 });
-
-
-
