@@ -67,8 +67,12 @@ const renderSelectPersonBox = () => {
 };
 
 //担当者を削除する関数
-const deletePerson = (index) => {
-    personList = personList.filter((_, i) => i !== index);
+const deletePerson = (personId) => {
+    if (taskList.find(task => task.personId === personId)) {
+        alert ('担当者のタスクがあるため削除できません')
+        return ;
+    }
+    personList = personList.filter(person => person.id !== personId);
     renderSelectPersonBox();
     renderPersonList();
 }
@@ -99,7 +103,7 @@ const renderTaskList = () => {
 
 const renderPersonList = () => {
     personListArea.innerHTML = personList.map((person, i) => {
-        return `<li>${person.name}<button onclick="deletePerson(${i})">delete</li>`
+        return `<li>${person.name}<button onclick="deletePerson('${person.id}')">delete</li>`
     }).join('');
 } 
 taskSubmitButton.addEventListener('click', function() {
