@@ -13,11 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //担当者をデータとして管理する変数
     let personList = [{ id: "1", name: "柿崎"}, {id: "2", name: "柴田"}, {id: "3", name: "黒澤"}];
 
-    //プルダウンで選択された担当者と一致するidをpersonListから探し出し、担当者名で返却する関数
-    const getPersonNameById = (personId) => {
-        return personList.find(person => person.id === personId).name;
-    }
-
+    
     // タスクを追加する関数
     const addTask = function(newTaskTitle, selectedPersonId) {
         if(newTaskTitle === '') return; // 何も入力されてなかったら処理終了
@@ -40,30 +36,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // タスクを削除する関数
     const deleteTask = (taskId) => {
         const task = taskList.find( task => task.id === taskId);
-        deleteTagetElm = document.querySelector('#task_' + taskId);
+        deleteTargetElm = document.querySelector('#task_' + taskId);
         if (task.status === 0) {
-            todoArea.removeChild(deleteTagetElm);
+            todoArea.removeChild(deleteTargetElm);
         }
         if (task.status === 1) {
-            doingArea.removeChild(deleteTagetElm);
+            doingArea.removeChild(deleteTargetElm);
         }
         if (task.status === 2) {
-            doneArea.removeChild(deleteTagetElm);
+            doneArea.removeChild(deleteTargetElm);
         }
         taskList = taskList.filter(task => task.id !== taskId); // 削除対象の配列のindexを除いてtaskListを上書き
     }
     const changeStatus = (taskId, newStatus) => {
-        deleteTagetElm = document.querySelector('#task_' + taskId);
-
+        deleteTargetElm = document.querySelector('#task_' + taskId);
+        
         const task = taskList.find( task => task.id === taskId);
         if (task.status === 0) {
-            todoArea.removeChild(deleteTagetElm);
+            todoArea.removeChild(deleteTargetElm);
         }
         if (task.status === 1) {
-            doingArea.removeChild(deleteTagetElm);
+            doingArea.removeChild(deleteTargetElm);
         }
         if (task.status === 2) {
-            doneArea.removeChild(deleteTagetElm);
+            doneArea.removeChild(deleteTargetElm);
         }
         task.status = newStatus;
         appendTask(task);
@@ -71,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const appendTask = function(task) {
         newTaskElm = document.createElement('li');
-        newTaskElm.setAttribute("id", "task_" + task.id)
+        newTaskElm.setAttribute("id", "task_" + task.id);
         newTaskElm.textContent = task.title;
         if (task.status === 0) {
             todoArea.appendChild(newTaskElm);
@@ -116,32 +112,49 @@ document.addEventListener('DOMContentLoaded', function() {
         newTaskElm.appendChild(deleteButton);
         
     }
-    const defaultPersonList = function() {
+    const defaultPerson = function() {
         personList.forEach((person) => {
             defaultPersonElm = document.createElement('li');
+            defaultPersonElm.setAttribute("id", "person_" + person.id);
             defaultPersonElm.textContent = person.name;
             personListArea.appendChild(defaultPersonElm);
+
+            deleteButton = document.createElement('button');
+            deleteButton.textContent = 'delete';
+            deleteButton.addEventListener('click', function() {
+                deletePerson(person.id);
+            })
+            defaultPersonElm.appendChild(deleteButton);
         });
     }
 
     const appendPerson = function(person) {
         newPersonElm = document.createElement('li');
+        newPersonElm.setAttribute("id", "person_" + person.id);
         newPersonElm.textContent = person.name
         personListArea.appendChild(newPersonElm);
-    }
 
+        deleteButton = document.createElement('button');
+        deleteButton.textContent = 'delete';
+        deleteButton.addEventListener('click', function() {
+            deletePerson(person.id);
+        })
+        newPersonElm.appendChild(deleteButton);
+    }
+    
+    
     const selectPersonBox = (person) => {
         newSelectPersonElm = document.createElement('option');
+        newSelectPersonElm.setAttribute("id", "select_person_" + person.id)
         newSelectPersonElm.value = person.id;
         newSelectPersonElm.textContent = person.name;
         selectedPersonId.appendChild(newSelectPersonElm);
-        console.log(selectedPersonId)
-
     }
     
     const defaultSelectPersonBox = () => {
         personList.forEach((person) => {
             const defaultSelectPersonElm = document.createElement('option');
+            defaultSelectPersonElm.setAttribute("id", "select_person_" + person.id)
             defaultSelectPersonElm.value = person.id;
             defaultSelectPersonElm.textContent = person.name;
             selectedPersonId.appendChild(defaultSelectPersonElm);
@@ -150,13 +163,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //担当者を削除する関数
     const deletePerson = (personId) => {
-        if (taskList.find(task => task.personId === personId)) {
+        const task = taskList.find(task => task.personId === personId);
+        deletePersonElm = document.querySelector('#person_' + personId);
+        deleteSelectPersonElm = document.querySelector('#select_person_' + personId);
+        if (task) {
             alert ('担当者のタスクがあるため削除できません')
             return ;
         }
+        personListArea.removeChild(deletePersonElm);
+        selectedPersonId.removeChild(deleteSelectPersonElm);
         personList = personList.filter(person => person.id !== personId);
-        renderSelectPersonBox();
-        renderPersonList();
     }
 
     taskSubmitButton.addEventListener('click', function() {
@@ -173,6 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
         newPersonName.value = '';
     });
 
-    defaultPersonList();
+    defaultPerson();
 });
 
