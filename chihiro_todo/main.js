@@ -67,8 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const appendTask = function(task) {
         newTaskElm = document.createElement('li');
+        const person = personList.find(person => person.id === task.personId);
+        taskPersonElm = document.createElement('span');
         newTaskElm.setAttribute("id", "task_" + task.id);
         newTaskElm.textContent = task.title;
+        taskPersonElm.textContent = person.name;
         if (task.status === 0) {
             todoArea.appendChild(newTaskElm);
         }
@@ -78,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (task.status === 2) {
             doneArea.appendChild(newTaskElm);
         }
-
+        
         if (task.status !== 0) {
             const todoButton = document.createElement('button');
             todoButton.textContent = 'todo';
@@ -111,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         newTaskElm.appendChild(deleteButton);
         
+        newTaskElm.appendChild(taskPersonElm);
     }
     const defaultPerson = function() {
         personList.forEach((person) => {
