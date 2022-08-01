@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const newPerson = { id: newPersonId, name: newPersonName }
         personList.push(newPerson);
         appendPerson(newPerson);
-        selectPersonBox(newPerson);
+        appendPersonSelectBox(newPerson);
     }
 
     // タスクを削除する関数
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     
-    const selectPersonBox = (person) => {
+    const appendPersonSelectBox = (person) => {
         appendPersonSelectElm = document.createElement('option');
         appendPersonSelectElm.setAttribute("id", "select_person_" + person.id)
         appendPersonSelectElm.value = person.id;
@@ -146,9 +146,9 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedPersonId.appendChild(appendPersonSelectElm);
     }
     
-    const defaultSelectPersonBox = () => {
+    const appendDefaultPersonSelectBox = () => {
         personList.forEach((person) => {
-            selectPersonBox(person);
+            appendPersonSelectBox(person);
         });
     }
 
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
         newTask.value = '';
     });
 
-    defaultSelectPersonBox();
+    appendDefaultPersonSelectBox();
 
     personSubmitButton.addEventListener('click', function() {
         const newPersonName = document.querySelector('#person_name');
