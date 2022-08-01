@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
         newTaskElm.appendChild(taskPersonElm);
     }
 
-    const defaultPerson = function() {
+    const appendDefaultPerson = function() {
         personList.forEach((person) => {
             appendPerson(person);
         });
@@ -180,6 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
         newPersonName.value = '';
     });
 
-    defaultPerson();
+    appendDefaultPerson();
 });
 
