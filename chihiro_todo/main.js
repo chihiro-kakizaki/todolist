@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // タスクを削除する関数
     const deleteTask = (taskId) => {
         const task = taskList.find( task => task.id === taskId);
-        deleteTargetElm = document.querySelector('#task_' + taskId);
+        const deleteTargetElm = document.querySelector('#task_' + taskId);
         if (task.status === 0) {
             todoArea.removeChild(deleteTargetElm);
         }
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         taskList = taskList.filter(task => task.id !== taskId); // 削除対象の配列のindexを除いてtaskListを上書き
     }
     const changeStatus = (taskId, newStatus) => {
-        deleteTargetElm = document.querySelector('#task_' + taskId);
+        const deleteTargetElm = document.querySelector('#task_' + taskId);
         
         const task = taskList.find( task => task.id === taskId);
         if (task.status === 0) {
@@ -168,8 +168,8 @@ document.addEventListener('DOMContentLoaded', function() {
     //担当者を削除する関数
     const deletePerson = (personId) => {
         const task = taskList.find(task => task.personId === personId);
-        deletePersonElm = document.querySelector('#person_' + personId);
-        deleteSelectPersonElm = document.querySelector('#select_person_' + personId);
+        const deletePersonElm = document.querySelector('#person_' + personId);
+        const deleteSelectPersonElm = document.querySelector('#select_person_' + personId);
         if (task) {
             alert ('担当者のタスクがあるため削除できません')
             return ;
