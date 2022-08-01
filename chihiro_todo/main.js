@@ -168,12 +168,12 @@ document.addEventListener('DOMContentLoaded', function() {
     //担当者を削除する関数
     const deletePerson = (personId) => {
         const task = taskList.find(task => task.personId === personId);
-        const deletePersonElm = document.querySelector('#person_' + personId);
-        const deleteSelectPersonElm = document.querySelector('#select_person_' + personId);
         if (task) {
             alert ('担当者のタスクがあるため削除できません')
             return ;
         }
+        const deletePersonElm = document.querySelector('#person_' + personId);
+        const deleteSelectPersonElm = document.querySelector('#select_person_' + personId);
         personListArea.removeChild(deletePersonElm);
         selectedPersonId.removeChild(deleteSelectPersonElm);
         personList = personList.filter(person => person.id !== personId);
