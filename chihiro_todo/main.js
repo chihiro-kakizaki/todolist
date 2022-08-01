@@ -148,20 +148,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     const selectPersonBox = (person) => {
-        newSelectPersonElm = document.createElement('option');
-        newSelectPersonElm.setAttribute("id", "select_person_" + person.id)
-        newSelectPersonElm.value = person.id;
-        newSelectPersonElm.textContent = person.name;
-        selectedPersonId.appendChild(newSelectPersonElm);
+        appendPersonSelectElm = document.createElement('option');
+        appendPersonSelectElm.setAttribute("id", "select_person_" + person.id)
+        appendPersonSelectElm.value = person.id;
+        appendPersonSelectElm.textContent = person.name;
+        selectedPersonId.appendChild(appendPersonSelectElm);
     }
     
     const defaultSelectPersonBox = () => {
         personList.forEach((person) => {
-            const defaultSelectPersonElm = document.createElement('option');
-            defaultSelectPersonElm.setAttribute("id", "select_person_" + person.id)
-            defaultSelectPersonElm.value = person.id;
-            defaultSelectPersonElm.textContent = person.name;
-            selectedPersonId.appendChild(defaultSelectPersonElm);
+            selectPersonBox(person);
         });
     }
 
