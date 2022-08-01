@@ -116,34 +116,25 @@ document.addEventListener('DOMContentLoaded', function() {
         taskPersonElm.textContent = person.name;
         newTaskElm.appendChild(taskPersonElm);
     }
+
     const defaultPerson = function() {
         personList.forEach((person) => {
-            defaultPersonElm = document.createElement('li');
-            defaultPersonElm.setAttribute("id", "person_" + person.id);
-            defaultPersonElm.textContent = person.name;
-            personListArea.appendChild(defaultPersonElm);
-
-            deleteButton = document.createElement('button');
-            deleteButton.textContent = 'delete';
-            deleteButton.addEventListener('click', function() {
-                deletePerson(person.id);
-            })
-            defaultPersonElm.appendChild(deleteButton);
+            appendPerson(person);
         });
     }
 
     const appendPerson = function(person) {
-        newPersonElm = document.createElement('li');
-        newPersonElm.setAttribute("id", "person_" + person.id);
-        newPersonElm.textContent = person.name
-        personListArea.appendChild(newPersonElm);
+        appendPersonElm = document.createElement('li');
+        appendPersonElm.setAttribute("id", "person_" + person.id);
+        appendPersonElm.textContent = person.name
+        personListArea.appendChild(appendPersonElm);
 
         deleteButton = document.createElement('button');
         deleteButton.textContent = 'delete';
         deleteButton.addEventListener('click', function() {
             deletePerson(person.id);
         })
-        newPersonElm.appendChild(deleteButton);
+        appendPersonElm.appendChild(deleteButton);
     }
     
     
