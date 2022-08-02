@@ -139,11 +139,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     const appendPersonSelectBox = (person) => {
-        const appendPersonSelectElm = document.createElement('option');
-        appendPersonSelectElm.setAttribute("id", "select_person_" + person.id)
-        appendPersonSelectElm.value = person.id;
-        appendPersonSelectElm.textContent = person.name;
-        selectedPersonId.appendChild(appendPersonSelectElm);
+        const newPersonSelectElm = document.createElement('option');
+        newPersonSelectElm.setAttribute("id", "select_person_" + person.id)
+        newPersonSelectElm.value = person.id;
+        newPersonSelectElm.textContent = person.name;
+        selectedPersonId.appendChild(newPersonSelectElm);
     }
     
     const appendDefaultPersonSelectBox = () => {
