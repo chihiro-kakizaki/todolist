@@ -6,9 +6,16 @@
 </head>
 <body>
 <h1>Chihiro-TODO-List</h1>
+
 <form>
     <input id="task_value" type="text" />
+    <select id="person_select">
+    </select>
     <button id="task_submit" type="button">Add Task</button>
+</form>
+<form>
+    <input id="person_name" type="text" />
+    <button id="person_submit" type="button">Add Person</button>
 </form>
 <div>
     <h2>Todo Tasks</h2>
@@ -21,6 +28,10 @@
 <div>
     <h2>Done Tasks</h2>
     <ul id="done_area"></ul>
+</div>
+<div>
+    <h2>Person List</h2>
+    <ul id="person_list_area"></ul>
 </div>
 <script src="main.js"></script>
 </body>
