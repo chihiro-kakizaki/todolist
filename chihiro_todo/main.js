@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const appendTask = function(task) {
-        newTaskElm = document.createElement('li');
+        const newTaskElm = document.createElement('li');
         newTaskElm.setAttribute("id", "task_" + task.id);
         newTaskElm.textContent = task.title;
         if (task.status === 0) {
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         newTaskElm.appendChild(deleteButton);
         
         const person = personList.find(person => person.id === task.personId);
-        taskPersonElm = document.createElement('span');
+        const taskPersonElm = document.createElement('span');
         taskPersonElm.textContent = person.name;
         newTaskElm.appendChild(taskPersonElm);
     }
@@ -124,12 +124,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const appendPerson = function(person) {
-        appendPersonElm = document.createElement('li');
+        const appendPersonElm = document.createElement('li');
         appendPersonElm.setAttribute("id", "person_" + person.id);
         appendPersonElm.textContent = person.name
         personListArea.appendChild(appendPersonElm);
 
-        deleteButton = document.createElement('button');
+        const deleteButton = document.createElement('button');
         deleteButton.textContent = 'delete';
         deleteButton.addEventListener('click', function() {
             deletePerson(person.id);
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     const appendPersonSelectBox = (person) => {
-        appendPersonSelectElm = document.createElement('option');
+        const appendPersonSelectElm = document.createElement('option');
         appendPersonSelectElm.setAttribute("id", "select_person_" + person.id)
         appendPersonSelectElm.value = person.id;
         appendPersonSelectElm.textContent = person.name;
