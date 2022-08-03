@@ -1,0 +1,59 @@
+body {
+    padding-right: 10px;
+    padding-left:  10px;
+}
+ul {
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+
+
+.header {
+
+}
+
+.wrapper {
+    width: 980px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+}
+
+.todo_wrapper {
+
+}
+
+.person_wrapper {
+
+}
+
+.todo_content {
+    min-height: 100px;
+}
+
+.todo_content > ul {
+    background: #D9D9D9FF;
+    border-radius: 5px;
+}
+
+.todo_content > ul > li {
+    padding: 10px 5px;
+}
+
+.button {
+    cursor: pointer;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 5px 10px;
+}
+
+.add_button {
+    background: #0E6AC5;
+}
+
+.delete_button {
+    background: #C50000;
+}
