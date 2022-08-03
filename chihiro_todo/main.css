@@ -1,0 +1,62 @@
+.wrapper {
+    width: 980px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+li {
+    list-style: none;
+}
+
+.task_form {
+    display: grid;
+    grid-template-columns: 150px 100px 1fr;
+    grid-column-gap: 10px;
+}
+
+.person_form {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-column-gap: 10px;
+}
+
+.label {
+    display: block;
+    font-size: 0.8rem;
+}
+
+.input {
+    display: block;
+    width: auto;
+}
+
+.select {
+    display: block;
+    width: 100px;
+}
+
+.button {
+    cursor: pointer;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 5px 10px;
+}
+
+.add_button {
+    background:rgb(71, 182, 219);
+    margin: 10px auto;
+}
+
+.add_button:hover {
+    background: rgb(81, 166, 194);
+    
+}
+
+.delete_button {
+    background:rgb(231, 108, 108);
+}
+
+.delete_button:hover {
+    background: rgb(190, 66, 66);
+}

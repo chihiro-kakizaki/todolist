@@ -130,7 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
         personListArea.appendChild(appendPersonElm);
 
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'delete';
+        deleteButton.textContent = '削除';
+        deleteButton.className = 'button delete_button'
         deleteButton.addEventListener('click', function() {
             deletePerson(person.id);
         })
