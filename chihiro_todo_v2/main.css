@@ -21,12 +21,14 @@ li {
     grid-column-gap: 10px;
 }
 
-.todo_wrapper {
+.task_wrapper {
 
 }
 
-.person_wrapper {
-
+.task_form {
+    display: grid;
+    grid-template-columns: 200px 100px 1fr;
+    grid-column-gap: 10px;
 }
 
 .todo_content {
@@ -40,6 +42,35 @@ li {
 
 .todo_content > ul > li {
     padding: 10px 5px;
+}
+
+.person_wrapper {
+
+}
+
+.person_form {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-column-gap: 10px;
+}
+
+.task_form > div, .person_form > div {
+    margin: auto 0 0 0;
+}
+
+.label {
+    display: block;
+    font-size: 0.8rem;
+}
+
+.input {
+    display: block;
+    width: auto;
+}
+
+.select {
+    display: block;
+    width: 100px;
 }
 
 .button {

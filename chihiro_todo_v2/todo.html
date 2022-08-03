@@ -10,14 +10,20 @@
         <h1>Chihiro-TODO-List V2</h1>
     </header>
     <main class="wrapper">
-        <section class="todo_wrapper">
+        <section class="task_wrapper">
             <h2>タスク管理</h2>
-            <form>
-                <label for="task_value">新規タスク</label>
-                <input id="task_value" type="text" placeholder="タスクを入力してください"/>
-                <label for="person_select">担当者</label>
-                <select id="person_select"></select>
-                <button id="task_submit" class="button add_button" type="button">追加</button>
+            <form class="task_form">
+                <div>
+                    <label for="task_value" class="label">新規タスク</label>
+                    <input id="task_value" class="input" type="text" placeholder="タスクを入力してください"/>
+                </div>
+                <div>
+                    <label for="person_select" class="label">担当者</label>
+                    <select id="person_select" class="select"></select>
+                </div>
+                <div>
+                    <button id="task_submit" class="button add_button" type="button">追加</button>
+                </div>
             </form>
             <div class="todo_content">
                 <h2>Todo Tasks</h2>
@@ -34,10 +40,14 @@
         </section>
         <section class="person_wrapper">
             <h2>担当者管理</h2>
-            <form>
-                <label for="person_name">新規担当者</label>
-                <input id="person_name" type="text" placeholder="担当者を入力してください"/>
-                <button id="person_submit" class="button add_button" type="button">追加</button>
+            <form class="person_form">
+                <div>
+                    <label for="person_name" class="label">新規担当者</label>
+                    <input id="person_name" class="input" type="text" placeholder="担当者を入力してください"/>
+                </div>
+                <div>
+                    <button id="person_submit" class="button add_button" type="button">追加</button>
+                </div>
             </form>
             <div>
                 <h2>担当者一覧</h2>
