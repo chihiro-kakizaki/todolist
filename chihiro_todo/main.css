@@ -63,6 +63,7 @@ section,form {
 .task_list{
     background: #eeeeee;
     min-height: 130px;
+    padding: 10px 0;
 }
 
 .task_list > li {
@@ -79,7 +80,7 @@ section,form {
     margin-bottom: 10px;
 }
 
-.task_list > li > div, button, span, .person_list > li > div, button {
+.task_list > li > div, span, .person_list > li > div {
     word-break: break-all;
     margin: auto 0;
 }
@@ -88,9 +89,10 @@ section,form {
     cursor: pointer;
     color: #FFFFFF;
     border: none;
-    max-height: 30px;
+    height: 30px;
     border-radius: 0.3rem;
     padding: 5px 10px;
+    margin: auto 0;
 }
 
 .add_button {
