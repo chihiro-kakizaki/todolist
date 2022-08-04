@@ -1,3 +1,7 @@
+body {
+    color: #555555;
+}
+
 header {
     padding-bottom: 20px;
 }
@@ -5,6 +9,7 @@ header {
 h1 {
     font-size: 45px;
     font-weight: bold;
+    border-bottom: medium solid gray;
 }
 
 h2 {
@@ -12,9 +17,22 @@ h2 {
     font-weight: 600;
 }
 
-section,form {
+a { 
+    font-size: 1px;
+    color: #FFFFFF;
+    background: cadetblue;
+    border: none;
+    height: 10px;
+    border-radius: 0.3rem;
+    padding: 5px 8px;
+    margin-right: 5px;
+
+}
+
+section, form {
     padding-top: 10px;
 }
+
 .wrapper {
     padding: 50px;
 }
@@ -30,14 +48,14 @@ section,form {
     display: grid;
     grid-template-columns: 200px 100px 1fr;
     grid-column-gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .person_form {
     display: grid;
     grid-template-columns: 200px 1fr;
     grid-column-gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .task_form > div, .person_form > div {
@@ -47,35 +65,33 @@ section,form {
 .label {
     display: block;
     font-size: 0.8rem;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 
-.input {
+.input, .select{
     display: block;
+    height: 35px;
     width: 100%;
 }
 
-.select {
-    display: block;
-    width: 100%;
-}
-
-.task_list{
+.task_list, .person_list {
     background: #eeeeee;
-    min-height: 130px;
-    padding: 10px 0;
+    min-height: 140px;
+    border-radius: 10px;
+    padding: 10px 0 10px 20px;
+    margin: 20px 0;
 }
 
 .task_list > li {
     display: grid;
     grid-template-columns: 150px 1fr 1fr 1fr 1fr;
     grid-column-gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .person_list > li {
     display: grid;
-    grid-template-columns: 200px 70px;
+    grid-template-columns: 300px 70px;
     grid-column-gap: 10px;
     margin-bottom: 10px;
 }
@@ -97,11 +113,12 @@ section,form {
 
 .add_button {
     background:#A4C6FF;
+    height: 35px;
 }
 
 .add_button:hover {
     background: #5D99FF;
-    
+    height: 35px;
 }
 
 .delete_button {
