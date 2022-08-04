@@ -1,38 +1,75 @@
+h1 {
+    font-size: 45px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: 600;
+    padding: 10px 0;
+}
+
 .wrapper {
+    padding: 50px;
+}
+
+.main_wrapper {
     width: 980px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-}
-
-li {
-    list-style: none;
+    grid-column-gap: 10px;
 }
 
 .task_form {
     display: grid;
-    grid-template-columns: 150px 100px 1fr;
+    grid-template-columns: 200px 100px 1fr;
     grid-column-gap: 10px;
 }
 
 .person_form {
     display: grid;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 200px 1fr;
     grid-column-gap: 10px;
+}
+
+.task_form > div, .person_form > div {
+    margin: auto 0 0 0;
 }
 
 .label {
     display: block;
     font-size: 0.8rem;
+    padding-bottom: 3px;
 }
 
 .input {
     display: block;
-    width: auto;
+    width: 100%;
 }
 
 .select {
     display: block;
-    width: 100px;
+    width: 100%;
+}
+
+.task_list > li {
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    padding-bottom: 10px;
+}
+
+.task_list > li > div, span, .person_list > li > div {
+    word-break: break-all;
+    margin: auto 0;
+}
+
+.person_list > li {
+    display: grid;
+    grid-template-columns: 200px 70px;
+    grid-column-gap: 10px;
+    padding-bottom: 10px;
 }
 
 .button {
@@ -44,19 +81,26 @@ li {
 }
 
 .add_button {
-    background:rgb(71, 182, 219);
-    margin: 10px auto;
+    background:#A4C6FF;
 }
 
 .add_button:hover {
-    background: rgb(81, 166, 194);
+    background: #5D99FF;
     
 }
 
 .delete_button {
-    background:rgb(231, 108, 108);
+    background:#FA8072;
 }
 
 .delete_button:hover {
-    background: rgb(190, 66, 66);
+    background:#FF4500;
+}
+
+.task_button {
+    background: #aaaaaa;
+}
+
+.task_button:hover {
+    background: #666666;
 }

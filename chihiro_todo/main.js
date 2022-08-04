@@ -67,8 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const appendTask = function(task) {
         const newTaskElm = document.createElement('li');
+        const newTaskTitleElm = document.createElement('div')
+        newTaskTitleElm.textContent = task.title
         newTaskElm.setAttribute("id", "task_" + task.id);
-        newTaskElm.textContent = task.title;
+        newTaskElm.appendChild(newTaskTitleElm)
         if (task.status === 0) {
             todoArea.appendChild(newTaskElm);
         }
@@ -82,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (task.status !== 0) {
             const todoButton = document.createElement('button');
             todoButton.textContent = 'todo';
+            todoButton.className = 'button task_button'
             todoButton.addEventListener('click', function() {
                 changeStatus(task.id, 0);
             })
@@ -90,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (task.status !== 1) {
             const doingButton = document.createElement('button');
             doingButton.textContent = 'doing';
+            doingButton.className = 'button task_button'
             doingButton.addEventListener('click', function() {
                 changeStatus(task.id, 1);
             })
@@ -98,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (task.status !== 2) {
             const doneButton = document.createElement('button');
             doneButton.textContent = 'done';
+            doneButton.className = 'button task_button'
             doneButton.addEventListener('click', function() {
                 changeStatus(task.id, 2);
             })
@@ -105,7 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'delete';
+        deleteButton.textContent = '削除';
+        deleteButton.className = 'button delete_button'
         deleteButton.addEventListener('click', function() {
             deleteTask(task.id);
         })
@@ -125,8 +131,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const appendPerson = function(person) {
         const appendPersonElm = document.createElement('li');
+        const appendPersonNameElm = document.createElement('div');
         appendPersonElm.setAttribute("id", "person_" + person.id);
-        appendPersonElm.textContent = person.name
+        appendPersonNameElm.textContent = person.name
+        console.log(appendPersonNameElm)
+        appendPersonElm.appendChild(appendPersonNameElm)
         personListArea.appendChild(appendPersonElm);
 
         const deleteButton = document.createElement('button');

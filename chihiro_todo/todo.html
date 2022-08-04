@@ -2,57 +2,61 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="recet.css">
         <link rel="stylesheet" href="main.css">
         <title>Chihiro-TODO-List</title>
     </head>
     <body>
-        <header class="header">
-            <h1>Chihiro-TODO-List</h1>
-        </header>
-        <main class ="wrapper">
-            <section class="todo_wrapper">
-                <h2>タスク管理</h2>
-                <form class="task_form">
-                    <div>
-                        <label for="task_value" class="label">新規タスク</label>
-                        <input id="task_value" class="input" type="text" placeholder="タスクを入力して下さい" />
+        <div class="wrapper">
+            <header class="header">
+                <h1>Chihiro-TODO-List</h1>
+            </header>
+            <main class ="main_wrapper">
+                <section class="todo_wrapper">
+                    <h2>タスク管理</h2>
+                    <form class="task_form">
+                        <div>
+                            <label for="task_value" class="label">新規タスク</label>
+                            <input id="task_value" class="input" type="text" placeholder="タスクを入力して下さい" />
+                        </div>
+                        <div>
+                            <label for="person_select" class="label">担当者</label>
+                            <select id="person_select" class="select"></select>
+                        </div>
+                        <div>
+                            <button id="task_submit" class="button add_button" type="button">追加</button>
+                        </div>
+                    </form>      
+                    <div class="todo_content">
+                        <h2>Todo Tasks</h2>
+                        <ul id="todo_area" class="task_list"></ul>
                     </div>
-                    <div>
-                        <label for="person_select" class="label">担当者</label>
-                        <select id="person_select" class="select"></select>
+                    <div class="todo_content">
+                        <h2>Doing Tasks</h2>
+                        <ul id="doing_area" class="task_list"></ul>
                     </div>
-                    <div>
-                        <button id="task_submit" class="button add_button" type="button">追加</button>
+                    <div class="todo_content">
+                        <h2>Done Tasks</h2>
+                        <ul id="done_area" class="task_list"></ul>
                     </div>
-                </form>
-                <div class="todo_content">
-                    <h2>Todo Tasks</h2>
-                    <ul id="todo_area"></ul>
+
+                </section>
+                <div class="person_wrapper">
+                    <h2>担当管理者</h2>
+                    <form class="person_form">
+                        <div>
+                            <label for="person_name" class="label">新規担当者</label>
+                            <input id="person_name" class="input" type="text" placeholder="担当者を入力して下さい" />    
+                        </div>
+                        <div>
+                            <button id="person_submit" class="button add_button" type="button">追加</button>
+                        </div>
+                    </form>
+                    <h2>Person List</h2>
+                    <ul id="person_list_area" class="person_list"></ul>
                 </div>
-                <div class="todo_content">
-                    <h2>Doing Tasks</h2>
-                    <ul id="doing_area"></ul>
-                </div>
-                <div class="todo_content">
-                    <h2>Done Tasks</h2>
-                    <ul id="done_area"></ul>
-                </div>
-            </section>
-            <div class="person_wrapper">
-                <h2>担当管理者</h2>
-                <form class="person_form">
-                    <div>
-                        <label for="person_name" class="label">新規担当者</label>
-                        <input id="person_name" class="input" type="text" placeholder="担当者を入力して下さい" />    
-                    </div>
-                    <div>
-                        <button id="person_submit" class="button add_button" type="button">追加</button>
-                    </div>
-                </form>
-                <h2>Person List</h2>
-                <ul id="person_list_area"></ul>
-            </div>
-        </main>
+            </main>
+        </div>
         <script src="main.js"></script>
     </body>
 </html>
