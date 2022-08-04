@@ -53,6 +53,11 @@ h2 {
     width: 100%;
 }
 
+.task_list{
+    background: #eeeeee;
+    min-height: 130px;
+}
+
 .task_list > li {
     display: grid;
     grid-template-columns: 150px 1fr 1fr 1fr 1fr;
@@ -64,6 +69,7 @@ h2 {
     word-break: break-all;
     margin: auto 0;
 }
+
 
 .person_list > li {
     display: grid;
