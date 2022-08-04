@@ -60,7 +60,7 @@ h2 {
     padding-bottom: 10px;
 }
 
-.task_list > li > div, span, .person_list > li > div {
+.task_list > li > div, button, span, .person_list > li > div, button {
     word-break: break-all;
     margin: auto 0;
 }
@@ -76,6 +76,7 @@ h2 {
     cursor: pointer;
     color: #FFFFFF;
     border: none;
+    max-height: 30px;
     border-radius: 0.3rem;
     padding: 5px 10px;
 }
