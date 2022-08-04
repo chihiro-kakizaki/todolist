@@ -134,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const appendPersonNameElm = document.createElement('div');
         appendPersonElm.setAttribute("id", "person_" + person.id);
         appendPersonNameElm.textContent = person.name
-        console.log(appendPersonNameElm)
         appendPersonElm.appendChild(appendPersonNameElm)
         personListArea.appendChild(appendPersonElm);
 
