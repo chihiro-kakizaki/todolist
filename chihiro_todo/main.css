@@ -20,7 +20,7 @@ h2 {
 a { 
     font-size: 1px;
     color: #FFFFFF;
-    background: cadetblue;
+    background: #00ac97;
     border: none;
     height: 10px;
     border-radius: 0.3rem;
@@ -40,6 +40,10 @@ section, form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
+}
+
+.person_wrapper {
+    width: 500px;
 }
 
 .task_form {
@@ -82,7 +86,7 @@ section, form {
 
 .task_list > li {
     display: grid;
-    grid-template-columns: 150px 1fr 1fr 1fr 1fr;
+    grid-template-columns: 250px 1fr 1fr 1fr 100px;
     grid-column-gap: 10px;
     margin-bottom: 15px;
 }
@@ -103,7 +107,7 @@ section, form {
     cursor: pointer;
     color: #FFFFFF;
     border: none;
-    width: 65px;
+    width: 95px;
     height: 30px;
     border-radius: 0.3rem;
     padding: 5px 10px;
@@ -112,11 +116,13 @@ section, form {
 
 .add_button {
     background: #5D99FF;
+    width: 60px;
     height: 35px;
 }
 
 .add_button:hover {
     background:#A4C6FF;
+    width: 60px;
     height: 35px;
 }
 
@@ -129,12 +135,12 @@ section, form {
     
 }
 
-.task_button {
+.task_button, .cancel_button {
     background: #666666;
     
 }
 
-.task_button:hover {
+.task_button:hover, .cancel_button:hover {
     background: #aaaaaa;
 }
 
@@ -147,11 +153,9 @@ section, form {
 }
 
 .save_button {
-    background: #e6bfb2;
+    background: #5D99FF;
 }
 
 .save_button:hover {
-    background: #e8d3ca;
+    background:#A4C6FF;
 }
-
-
