@@ -13,9 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     //担当者をデータとして管理する変数
     let personList = [{ id: "1", name: "柿崎"}, {id: "2", name: "柴田"}, {id: "3", name: "黒澤"}];
 
-    
     // タスクを追加する関数
-    const addTask = function(newTaskTitle, selectedPersonId) {
+    const addTask = (newTaskTitle, selectedPersonId) => {
         if(newTaskTitle === '') return; // 何も入力されてなかったら処理終了
         const newTaskId = new Date().getTime().toString()
         const newTask = { id: newTaskId, title:newTaskTitle, status:0, personId: selectedPersonId }
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 担当者を追加する関数
-    const addPerson = function(newPersonName) {
+    const addPerson = (newPersonName) => {
         if(newPersonName === '') return;
         const newPersonId = new Date().getTime().toString();
         const newPerson = { id: newPersonId, name: newPersonName }
@@ -48,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         taskList = taskList.filter(task => task.id !== taskId); // 削除対象の配列のindexを除いてtaskListを上書き
     }
+
     const changeStatus = (taskId, newStatus) => {
         const deleteTargetElm = document.querySelector('#task_' + taskId);
         
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         appendTask(task);
     }
 
-    const appendTask = function(task) {
+    const appendTask = (task) => {
         const newTaskElm = document.createElement('li');
         const newTaskTitleElm = document.createElement('div')
         newTaskTitleElm.textContent = task.title
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             newTaskElm.appendChild(doneButton);
         }
-        
+
         const deleteButton = document.createElement('button');
         deleteButton.textContent = '削除';
         deleteButton.className = 'button delete_button'
@@ -121,6 +121,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const taskPersonElm = document.createElement('span');
         taskPersonElm.textContent = person.name;
         newTaskElm.appendChild(taskPersonElm);
+    }
+    
+    const ChangePersonNameOfTask = (personId, changedPersonName) => {
+        const task = taskList.filter(task => task.personId === personId);
+        for (let i = 0; i < task.length; i++){
+            const editTaskElm = document.querySelector('#task_' + task[i].id).querySelectorAll('span');
+            editTaskElm[0].textContent = changedPersonName;
+        }
     }
 
     const appendDefaultPerson = function() {
@@ -137,6 +145,15 @@ document.addEventListener('DOMContentLoaded', function() {
         appendPersonElm.appendChild(appendPersonNameElm)
         personListArea.appendChild(appendPersonElm);
 
+        const editButton = document.createElement('button');
+        editButton.setAttribute("id", "edit_button_" + person.id)
+        editButton.textContent = '編集'
+        editButton.className = 'button edit_button'
+        editButton.addEventListener('click', function() {
+            appendEditInput(person.id);  
+        })
+        appendPersonElm.appendChild(editButton);
+
         const deleteButton = document.createElement('button');
         deleteButton.textContent = '削除';
         deleteButton.className = 'button delete_button'
@@ -145,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         appendPersonElm.appendChild(deleteButton);
     }
-    
     
     const appendPersonSelectBox = (person) => {
         const newPersonSelectElm = document.createElement('option');
@@ -175,6 +191,52 @@ document.addEventListener('DOMContentLoaded', function() {
         personList = personList.filter(person => person.id !== personId);
     }
 
+    // changedPersonName
+    const appendEditInput = (personId) => {
+        const person = personList.find(person => person.id === personId);
+        const beforeChangeElm = document.querySelector('#person_' + personId);
+        const personNameBeforeChengeElm = beforeChangeElm.querySelector('div');
+        const appendEditInputElm = document.createElement('input');
+        appendEditInputElm.className = "input";
+        appendEditInputElm.value = person.name;
+        beforeChangeElm.replaceChild(appendEditInputElm, personNameBeforeChengeElm);
+        const editButton = document.querySelector('#edit_button_' + person.id);
+        const saveButton = document.createElement('button');
+        saveButton.setAttribute("id", "save_button_" + personId);
+        saveButton.className = 'button save_button'
+        saveButton.textContent = "保存"
+        beforeChangeElm.replaceChild(saveButton, editButton);
+        saveButton.addEventListener('click', function() {
+            savePerson(personId, appendEditInputElm.value);
+        })
+    }
+
+    const savePerson = (personId, enteredPersonName) => {
+        if (enteredPersonName === "") {
+            return ;
+        }
+        personList.find(person => person.id === personId).name = enteredPersonName;
+        const changedPersonElm = document.querySelector('#person_' + personId)
+        const newPersonNameElm = changedPersonElm.querySelector('input')
+        const changedPersonNameElm = document.createElement('div');
+        
+        changedPersonNameElm.textContent = enteredPersonName;
+        changedPersonElm.replaceChild(changedPersonNameElm, newPersonNameElm)
+        const appendEditSelectPersonElm = document.querySelector('#select_person_' + personId);
+        appendEditSelectPersonElm.textContent = enteredPersonName;
+        
+        const saveButton = document.querySelector('#save_button_' + personId);
+        const editButton = document.createElement('button');
+        editButton.setAttribute("id", "edit_button_" + personId)
+        editButton.textContent = '編集'
+        editButton.className = 'button edit_button'
+        changedPersonElm.replaceChild(editButton, saveButton)
+        editButton.addEventListener('click', function() {
+            appendEditInput(personId);
+        })
+        ChangePersonNameOfTask(personId, enteredPersonName);
+    }
+
     taskSubmitButton.addEventListener('click', function() {
         const newTask = document.querySelector('#task_value');
         addTask(newTask.value, selectedPersonId.value);
@@ -191,4 +253,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
     appendDefaultPerson();
 });
-
