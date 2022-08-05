@@ -243,7 +243,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const personDivElm = document.createElement('div');
         personDivElm.textContent = enteredPersonName;
         changedPersonElm.replaceChild(personDivElm, personInputElm)
-        console.log(changedPersonElm)
         const appendEditSelectPersonElm = document.querySelector('#select_person_' + personId);
         appendEditSelectPersonElm.textContent = enteredPersonName;
         while (changedPersonElm.firstChild) {
