@@ -198,11 +198,11 @@ document.addEventListener('DOMContentLoaded', function() {
         underEditedPersonId = personId;
         const person = personList.find(person => person.id === personId);
         const beforeChangeElm = document.querySelector('#person_' + personId);
-        const personNameBeforeChengeElm = beforeChangeElm.querySelector('div');
+        const personNameBeforeChangeElm = beforeChangeElm.querySelector('div');
         const appendEditInputElm = document.createElement('input');
         appendEditInputElm.className = "input";
         appendEditInputElm.value = person.name;
-        beforeChangeElm.replaceChild(appendEditInputElm, personNameBeforeChengeElm);
+        beforeChangeElm.replaceChild(appendEditInputElm, personNameBeforeChangeElm);
         const editButton = document.querySelector('#edit_button_' + person.id);
         const saveButton = document.createElement('button');
         saveButton.setAttribute("id", "save_button_" + personId);
