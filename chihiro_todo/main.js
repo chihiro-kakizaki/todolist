@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     //担当者をデータとして管理する変数
     let personList = [{ id: "1", name: "柿崎"}, {id: "2", name: "柴田"}, {id: "3", name: "黒澤"}];
 
+    // 編集中のpersonIdを管理する変数
+    let underEditedPersonId = undefined;
+
     // タスクを追加する関数
     const addTask = (newTaskTitle, selectedPersonId) => {
         if(newTaskTitle === '') return; // 何も入力されてなかったら処理終了
@@ -28,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const newPersonId = new Date().getTime().toString();
         const newPerson = { id: newPersonId, name: newPersonName }
         personList.push(newPerson);
-        appendPerson(newPerson);
+        appendNewPerson(newPerson);
         appendPersonSelectBox(newPerson);
     }
 
@@ -123,49 +126,46 @@ document.addEventListener('DOMContentLoaded', function() {
         newTaskElm.appendChild(taskPersonElm);
     }
     
-    const ChangePersonNameOfTask = (personId, changedPersonName) => {
-        const task = taskList.filter(task => task.personId === personId);
-        for (let i = 0; i < task.length; i++){
-            const editTaskElm = document.querySelector('#task_' + task[i].id).querySelectorAll('span');
-            editTaskElm[0].textContent = changedPersonName;
-        }
-    }
-
-    const appendDefaultPerson = function() {
+    const appendDefaultPerson = () =>  {
         personList.forEach((person) => {
-            appendPerson(person);
+            appendNewPerson(person);
         });
     }
 
-    const appendPerson = function(person) {
+    const appendNewPerson = (person) => {
         const appendPersonElm = document.createElement('li');
-        const appendPersonNameElm = document.createElement('div');
         appendPersonElm.setAttribute("id", "person_" + person.id);
-        appendPersonNameElm.textContent = person.name
-        appendPersonElm.appendChild(appendPersonNameElm)
+        appendPerson(person, appendPersonElm);
         personListArea.appendChild(appendPersonElm);
+    }
 
+    const appendPerson = (person, parentElm) => {
+        const appendPersonNameElm = document.createElement('div');
+        appendPersonNameElm.textContent = person.name
+        parentElm.appendChild(appendPersonNameElm)
+        
         const editButton = document.createElement('button');
-        editButton.setAttribute("id", "edit_button_" + person.id)
-        editButton.textContent = '編集'
-        editButton.className = 'button edit_button'
+        editButton.setAttribute("id", "edit_button_" + person.id);
+        editButton.textContent = '編集';
+        editButton.className = 'button edit_button';
         editButton.addEventListener('click', function() {
-            appendEditInput(person.id);  
+            appendEditInput(person.id);
         })
-        appendPersonElm.appendChild(editButton);
+        parentElm.appendChild(editButton);
 
         const deleteButton = document.createElement('button');
+        deleteButton.setAttribute("id", "delete_button_" + person.id);
         deleteButton.textContent = '削除';
-        deleteButton.className = 'button delete_button'
+        deleteButton.className = 'button delete_button';
         deleteButton.addEventListener('click', function() {
             deletePerson(person.id);
         })
-        appendPersonElm.appendChild(deleteButton);
+        parentElm.appendChild(deleteButton);
     }
-    
+
     const appendPersonSelectBox = (person) => {
         const newPersonSelectElm = document.createElement('option');
-        newPersonSelectElm.setAttribute("id", "select_person_" + person.id)
+        newPersonSelectElm.setAttribute("id", "select_person_" + person.id);
         newPersonSelectElm.value = person.id;
         newPersonSelectElm.textContent = person.name;
         selectedPersonId.appendChild(newPersonSelectElm);
@@ -190,9 +190,12 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedPersonId.removeChild(deleteSelectPersonElm);
         personList = personList.filter(person => person.id !== personId);
     }
-
-    // changedPersonName
+    
     const appendEditInput = (personId) => {
+        if (underEditedPersonId !== undefined) {
+            cancelEditPerson(underEditedPersonId);
+        }
+        underEditedPersonId = personId;
         const person = personList.find(person => person.id === personId);
         const beforeChangeElm = document.querySelector('#person_' + personId);
         const personNameBeforeChengeElm = beforeChangeElm.querySelector('div');
@@ -209,34 +212,52 @@ document.addEventListener('DOMContentLoaded', function() {
         saveButton.addEventListener('click', function() {
             savePerson(personId, appendEditInputElm.value);
         })
+        const deleteButton = document.querySelector('#delete_button_' + person.id)
+        const cancelButton = document.createElement('button');
+        cancelButton.className = 'button cancel_button';
+        cancelButton.textContent = "キャンセル";
+        beforeChangeElm.replaceChild(cancelButton, deleteButton);
+        cancelButton.addEventListener('click', function() {
+            cancelEditPerson(person.id);
+        })
     }
 
+    const cancelEditPerson = (cancelEditPersonId) => {
+        const person = personList.find(person => person.id === cancelEditPersonId);
+        const targetLiElm = document.querySelector('#person_' + cancelEditPersonId);
+        while (targetLiElm.firstChild) {
+            targetLiElm.removeChild(targetLiElm.firstChild);
+        }
+        appendPerson(person, targetLiElm);
+        underEditedPersonId = undefined;
+    } 
+    
     const savePerson = (personId, enteredPersonName) => {
         if (enteredPersonName === "") {
             return ;
         }
-        personList.find(person => person.id === personId).name = enteredPersonName;
-        const changedPersonElm = document.querySelector('#person_' + personId)
-        const newPersonNameElm = changedPersonElm.querySelector('input')
-        const changedPersonNameElm = document.createElement('div');
-        
-        changedPersonNameElm.textContent = enteredPersonName;
-        changedPersonElm.replaceChild(changedPersonNameElm, newPersonNameElm)
+        const person = personList.find(person => person.id === personId)
+        person.name = enteredPersonName;
+        const changedPersonElm = document.querySelector('#person_' + person.id)
+        const personInputElm = changedPersonElm.querySelector('input')
+        const personDivElm = document.createElement('div');
+        personDivElm.textContent = enteredPersonName;
+        changedPersonElm.replaceChild(personDivElm, personInputElm)
+        console.log(changedPersonElm)
         const appendEditSelectPersonElm = document.querySelector('#select_person_' + personId);
         appendEditSelectPersonElm.textContent = enteredPersonName;
-        
-        const saveButton = document.querySelector('#save_button_' + personId);
-        const editButton = document.createElement('button');
-        editButton.setAttribute("id", "edit_button_" + personId)
-        editButton.textContent = '編集'
-        editButton.className = 'button edit_button'
-        changedPersonElm.replaceChild(editButton, saveButton)
-        editButton.addEventListener('click', function() {
-            appendEditInput(personId);
-        })
-        ChangePersonNameOfTask(personId, enteredPersonName);
+        while (changedPersonElm.firstChild) {
+            changedPersonElm.removeChild(changedPersonElm.firstChild);
+        }
+        appendPerson(person, changedPersonElm);
+        // personに紐づくtaskの担当者名を変更
+        const task = taskList.filter(task => task.personId === personId);
+        for (let i = 0; i < task.length; i++){
+            const editTaskElm = document.querySelector('#task_' + task[i].id).querySelectorAll('span');
+            editTaskElm[0].textContent = enteredPersonName;
+        }
     }
-
+    
     taskSubmitButton.addEventListener('click', function() {
         const newTask = document.querySelector('#task_value');
         addTask(newTask.value, selectedPersonId.value);
