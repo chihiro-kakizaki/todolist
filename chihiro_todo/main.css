@@ -26,7 +26,6 @@ a {
     border-radius: 0.3rem;
     padding: 5px 8px;
     margin-right: 5px;
-
 }
 
 section, form {
@@ -38,10 +37,9 @@ section, form {
 }
 
 .main_wrapper {
-    width: 980px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 10px;
+    grid-column-gap: 20px;
 }
 
 .task_form {
@@ -76,9 +74,9 @@ section, form {
 
 .task_list, .person_list {
     background: #eeeeee;
-    min-height: 140px;
+    min-height: 155px;
     border-radius: 10px;
-    padding: 10px 0 10px 20px;
+    padding: 10px 20px;
     margin: 20px 0;
 }
 
@@ -91,7 +89,7 @@ section, form {
 
 .person_list > li {
     display: grid;
-    grid-template-columns: 300px 70px;
+    grid-template-columns: 250px 1fr 1fr;
     grid-column-gap: 10px;
     margin-bottom: 10px;
 }
@@ -105,6 +103,7 @@ section, form {
     cursor: pointer;
     color: #FFFFFF;
     border: none;
+    width: 65px;
     height: 30px;
     border-radius: 0.3rem;
     padding: 5px 10px;
@@ -112,27 +111,47 @@ section, form {
 }
 
 .add_button {
-    background:#A4C6FF;
-    height: 35px;
-}
-
-.add_button:hover {
     background: #5D99FF;
     height: 35px;
 }
 
+.add_button:hover {
+    background:#A4C6FF;
+    height: 35px;
+}
+
 .delete_button {
-    background:#FA8072;
+    background:#ea5550;
 }
 
 .delete_button:hover {
-    background:#FF4500;
+    background:#FA8072;
+    
 }
 
 .task_button {
-    background: #aaaaaa;
+    background: #666666;
+    
 }
 
 .task_button:hover {
-    background: #666666;
+    background: #aaaaaa;
 }
+
+.edit_button {
+    background: #00ac97;
+}
+
+.edit_button:hover {
+    background: #66cdaa;
+}
+
+.save_button {
+    background: #e6bfb2;
+}
+
+.save_button:hover {
+    background: #e8d3ca;
+}
+
+
