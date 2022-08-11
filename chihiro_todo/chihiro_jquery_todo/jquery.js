@@ -107,25 +107,19 @@ function deleteTask() {
     targetTaskElm.remove();
 }
 
-//担当者に削除ボタンを付与する関数
-
-
 //担当者をPersonListとselectboxから削除する関数
 function deletePerson() {
     const personLiElm = $(this).closest('li');
-    const personLiId =personLiElm.data('person-id').toString()
+    const personId =personLiElm.data('person-id').toString()
     personLiElm.remove();
     $('#person_select option').each(function() {
         const selectOptionId =$(this).val();
         const targetPersonElm = $(this).closest('option')
-        if (selectOptionId === personLiId) {
+        if (selectOptionId === personId) {
            targetPersonElm.remove()
         }
     })
 }
-
-//担当者に編集ボタンを付与する関数
-
 
 function appendEditInput(personElm, editButton) {
     const beforeChangePersonElm = personElm.children("span")
@@ -133,9 +127,9 @@ function appendEditInput(personElm, editButton) {
     if (underEditedPersonId !== undefined) {
         $('#person_list_area li').each(function() {
             if (($(this).data('person-id') === underEditedPersonId)) {
-            const cancelEditPersonElm = $(this)
-            cancelEditPerson(cancelEditPersonElm.children("span").text(), cancelEditPersonElm)
-            }
+                const cancelEditPersonElm = $(this)
+                cancelEditPerson(cancelEditPersonElm.children("span").text(), cancelEditPersonElm)
+                }
         })
     }
     underEditedPersonId = personElm.data('person-id');
