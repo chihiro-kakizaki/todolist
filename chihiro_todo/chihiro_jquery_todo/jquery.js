@@ -25,7 +25,8 @@ $(function() {
     $('#person_submit').click(function() {
         const personId = new Date().getTime().toString()
         const personName = $('#person_name').val()
-        appendNewSelectPerson(personName, personId);
+        const selectPersonElm =$('<option value=' + personId + '>'+ personName +'</option>')
+        selectPersonElm.appendTo($('#person_select'));
         appendNewPerson(personName,personId);
     })
 });
@@ -47,11 +48,6 @@ function appendPerson(personName,personLiElm) {
     const deleteButton =$('<button>').text("delete");
     deleteButton.appendTo(personLiElm);
     deleteButton.click(deletePerson);
-}
-
-function appendNewSelectPerson(personName, personId) {
-    const selectPersonElm =$('<option value=' + personId + '>'+ personName +'</option>')
-    selectPersonElm.appendTo($('#person_select'));
 }
 
 //ステータス(todo,doing,done)によってリストの表示するボタンを変更する関数
