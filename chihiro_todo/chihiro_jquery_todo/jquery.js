@@ -47,7 +47,6 @@ function appendPerson(personName,personLiElm) {
     const deleteButton =$('<button>').text("delete");
     deleteButton.appendTo(personLiElm);
     deleteButton.click(deletePerson);
-    $('#person_name').val("");
 }
 
 function appendNewSelectPerson(personName, personId) {
