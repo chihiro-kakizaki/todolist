@@ -3,12 +3,12 @@ let underEditedPersonId = undefined;
 //新規タスクをタスクリストに表示させる関数
 $(function () {
     $('#task_submit').click(function() {
-        const taskElm =$('<li>').text($('#task_value').val()); 
-        taskElm.appendTo($('#todo_area'));
-        const selectedPersonElm = $('#person_select option:selected')
-        const taskPersonSpanElm =$('<span data-task-person-id= '+ selectedPersonElm.val() +' >').text(selectedPersonElm.text());
-        taskPersonSpanElm.appendTo(taskElm);
-        appendButtonByStatus(taskElm);
+        if($('#task_value').val() === '') return;
+        const taskLiElm =$('<li>').text($('#task_value').val()); 
+        taskLiElm.appendTo($('#todo_area'));
+        const taskPersonSpanElm =$('<span data-task-person-id= '+ $('#person_select option:selected').val() +' >').text($('#person_select option:selected').text());
+        taskPersonSpanElm.appendTo(taskLiElm);
+        appendButtonByStatus(taskLiElm);
         $('#task_value').val("");
     })
 });
@@ -23,15 +23,15 @@ $(function() {
 //新規担当者をPersonListに表示させる関数
 $(function() {
     $('#person_submit').click(function() {
-        const createValue = new Date().getTime().toString()
+        const personId = new Date().getTime().toString()
         const personName = $('#person_name').val()
-        appendNewSelectPerson(personName, createValue);
-        appendNewPerson(personName,createValue);
+        appendNewSelectPerson(personName, personId);
+        appendNewPerson(personName,personId);
     })
 });
 
-function appendNewPerson(personName, createValue) {
-    const newPersonElm =$('<li data-person-id= '+ createValue +'>')
+function appendNewPerson(personName, personId) {
+    const newPersonElm =$('<li data-person-id= '+ personId +'>')
     newPersonElm.appendTo($('#person_list_area'))
     appendPerson(personName,newPersonElm)
 }
@@ -44,38 +44,38 @@ function appendPerson(personName,personElm) {
     $('#person_name').val("");
 }
 
-function appendNewSelectPerson(personName, createValue) {
-    const selectPersonElm =$('<option value=' + createValue + '>'+ personName +'</option>')
+function appendNewSelectPerson(personName, personId) {
+    const selectPersonElm =$('<option value=' + personId + '>'+ personName +'</option>')
     selectPersonElm.appendTo($('#person_select'));
 }
 
 //ステータス(todo,doing,done)によってリストの表示するボタンを変更する関数
-function appendButtonByStatus(taskElm) {
-    const taskPersonElm = taskElm.children("span")
-    const button = $(taskElm).find('button')
+function appendButtonByStatus(taskLiElm) {
+    const taskPersonSpanElm = taskLiElm.children("span")
+    const button = $(taskLiElm).find('button')
     button.remove()
-    const taskArea = $(taskElm).closest('ul')
+    const taskArea = $(taskLiElm).closest('ul')
 
     if (taskArea[0].id !== "todo_area") {
         const todoButton =$('<button>').text("todo");
-        taskPersonElm.before(todoButton);
+        taskPersonSpanElm.before(todoButton);
         todoButton.click(changeToTodo); 
     }
 
     if (taskArea[0].id !== "doing_area") {
         const doingButton =$('<button>').text("doing");
-        taskPersonElm.before(doingButton);
+        taskPersonSpanElm.before(doingButton);
         doingButton.click(changeToDoing);
     }
 
     if (taskArea[0].id !== "done_area") {
         const doneButton =$('<button>').text("done");
-        taskPersonElm.before(doneButton);
+        taskPersonSpanElm.before(doneButton);
         doneButton.click(changeToDone);
     }
 
     const deleteButton =$('<button>').text("delete");
-    taskPersonElm.before(deleteButton)
+    taskPersonSpanElm.before(deleteButton)
     deleteButton.click(deleteTask);
 }
 
