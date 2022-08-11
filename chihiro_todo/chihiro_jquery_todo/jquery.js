@@ -38,8 +38,7 @@ function appendNewPerson(personName, personId) {
 }
 
 function appendPerson(personName,personLiElm) {
-    const personLiSpanElm =$('<span>').text(personName);
-    personLiSpanElm.appendTo(personLiElm);
+    $('<span>').text(personName).appendTo(personLiElm);
     const editButton =$('<button>').text("edit");
     editButton.appendTo(personLiElm);
     editButton.click(function() {
@@ -133,9 +132,7 @@ function appendEditInput(personElm, editButton) {
         })
     }
     underEditedPersonId = personElm.data('person-id');
-    const personEditInput =$('<input>').attr('id', 'edit_input')
-    personEditInput.val(beforeEditPersonName);
-    personEditInput.replaceAll(beforeChangePersonElm)
+    $('<input>').attr('id', 'edit_input').val(beforeEditPersonName).replaceAll(beforeChangePersonElm)
     const beforeChangeDeleteButton = personElm.children().last();
     
     const cancelButton =$('<button>').text("cancel")
