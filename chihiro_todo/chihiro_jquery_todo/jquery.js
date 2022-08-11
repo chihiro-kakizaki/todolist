@@ -31,16 +31,22 @@ $(function() {
 });
 
 function appendNewPerson(personName, personId) {
-    const newPersonElm =$('<li data-person-id= '+ personId +'>')
-    newPersonElm.appendTo($('#person_list_area'))
-    appendPerson(personName,newPersonElm)
+    const newPersonLiElm =$('<li data-person-id= '+ personId +'>')
+    newPersonLiElm.appendTo($('#person_list_area'))
+    appendPerson(personName,newPersonLiElm)
 }
 
-function appendPerson(personName,personElm) {
+function appendPerson(personName,personLiElm) {
     const personLiSpanElm =$('<span>').text(personName);
-    personLiSpanElm.appendTo(personElm);
-    editPersonButton(personElm)
-    deletePersonButton(personElm);
+    personLiSpanElm.appendTo(personLiElm);
+    const editButton =$('<button>').text("edit");
+    editButton.appendTo(personLiElm);
+    editButton.click(function() {
+        appendEditInput(personLiElm,editButton);
+    })
+    const deleteButton =$('<button>').text("delete");
+    deleteButton.appendTo(personLiElm);
+    deleteButton.click(deletePerson);
     $('#person_name').val("");
 }
 
@@ -107,11 +113,7 @@ function deleteTask() {
 }
 
 //担当者に削除ボタンを付与する関数
-function deletePersonButton(personElm) {
-    const deleteButton =$('<button>').text("delete");
-    deleteButton.appendTo(personElm);
-    deleteButton.click(deletePerson);
-}
+
 
 //担当者をPersonListとselectboxから削除する関数
 function deletePerson() {
@@ -128,13 +130,7 @@ function deletePerson() {
 }
 
 //担当者に編集ボタンを付与する関数
-function editPersonButton(personElm) {
-    const editButton =$('<button>').text("edit");
-    editButton.appendTo(personElm);
-    editButton.click(function() {
-        appendEditInput(personElm,editButton);
-    })
-}
+
 
 function appendEditInput(personElm, editButton) {
     const beforeChangePersonElm = personElm.children("span")
