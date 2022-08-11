@@ -133,13 +133,13 @@ function appendEditInput(personElm, editButton) {
         })
     }
     underEditedPersonId = personElm.data('person-id');
-    const editPersonInput =$('<input>').attr('id', 'edit_input')
-    editPersonInput.val(beforeEditPersonName);
-    editPersonInput.replaceAll(beforeChangePersonElm)
-    const beforeChangedeleteButton = personElm.children().last();
+    const personEditInput =$('<input>').attr('id', 'edit_input')
+    personEditInput.val(beforeEditPersonName);
+    personEditInput.replaceAll(beforeChangePersonElm)
+    const beforeChangeDeleteButton = personElm.children().last();
     
     const cancelButton =$('<button>').text("cancel")
-    cancelButton.replaceAll(beforeChangedeleteButton)
+    cancelButton.replaceAll(beforeChangeDeleteButton)
     cancelButton.click(function() {
         cancelEditPerson(beforeEditPersonName, personElm);
     })
