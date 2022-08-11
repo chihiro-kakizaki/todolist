@@ -59,51 +59,39 @@ function appendButtonByStatus(taskLiElm) {
     if (taskArea[0].id !== "todo_area") {
         const todoButton =$('<button>').text("todo");
         taskPersonSpanElm.before(todoButton);
-        todoButton.click(changeToTodo); 
+        todoButton.click(function() {
+            const targetTaskElm = $(this).closest('li');
+            targetTaskElm.appendTo($('#todo_area'))
+            appendButtonByStatus(targetTaskElm);
+        }); 
     }
 
     if (taskArea[0].id !== "doing_area") {
         const doingButton =$('<button>').text("doing");
         taskPersonSpanElm.before(doingButton);
-        doingButton.click(changeToDoing);
+        doingButton.click(function() {
+            const targetTaskElm = $(this).closest('li');
+            targetTaskElm.appendTo($('#doing_area'));
+            appendButtonByStatus(targetTaskElm);
+        });
     }
 
     if (taskArea[0].id !== "done_area") {
         const doneButton =$('<button>').text("done");
         taskPersonSpanElm.before(doneButton);
-        doneButton.click(changeToDone);
+        doneButton.click(function() {
+            const targetTaskElm =$(this).closest('li');
+            targetTaskElm.appendTo($('#done_area'));
+            appendButtonByStatus(targetTaskElm);
+        });
     }
 
     const deleteButton =$('<button>').text("delete");
     taskPersonSpanElm.before(deleteButton)
-    deleteButton.click(deleteTask);
-}
-
-//タスクのステータスをtodoに変更する関数
-function changeToTodo() {
-    const targetTaskElm = $(this).closest('li');
-    targetTaskElm.appendTo($('#todo_area'))
-    appendButtonByStatus(targetTaskElm);
-}
-
-//タスクのステータスをdoingに変更する関数
-function changeToDoing() {
-    const targetTaskElm = $(this).closest('li');
-    targetTaskElm.appendTo($('#doing_area'));
-    appendButtonByStatus(targetTaskElm);
-}
-
-//タスクのステータスをdoneに変更する関数
-function changeToDone() {
-    const targetTaskElm =$(this).closest('li');
-    targetTaskElm.appendTo($('#done_area'));
-    appendButtonByStatus(targetTaskElm);
-}
-
-//タスクを削除する関数
-function deleteTask() {
-    const targetTaskElm = $(this).closest('li');
-    targetTaskElm.remove();
+    deleteButton.click(function() {
+        const targetTaskElm = $(this).closest('li');
+        targetTaskElm.remove();
+    });
 }
 
 //担当者をPersonListとselectboxから削除する関数
@@ -124,7 +112,6 @@ function deletePerson() {
                personOptionElm.remove()
             }
         })
-
     })
 }
 
