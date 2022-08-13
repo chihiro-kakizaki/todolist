@@ -1,0 +1,16 @@
+ul {
+  margin: 10;
+  padding: 10;
+}
+ul li {
+  display: inline-block;
+}
+ul li a {
+  display: block;
+  padding: 6px 12px;
+}
+ul li a:hover {
+  color: #666;
+}
+
+/*# sourceMappingURL=style.css.map */
