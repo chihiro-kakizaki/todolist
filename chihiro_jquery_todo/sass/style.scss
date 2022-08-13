@@ -1,0 +1,20 @@
+// sass/style.scss
+@use "sass:map";
+
+ul {
+    margin: 10;
+    padding: 10;
+  
+    li {
+      display: inline-block;
+  
+      a {
+        display: block;
+        padding: 6px 12px;
+  
+        &:hover {
+          color: #666;
+        }
+      }
+    }
+}
