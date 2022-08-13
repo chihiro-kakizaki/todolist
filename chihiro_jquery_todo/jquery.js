@@ -59,69 +59,64 @@ function appendButtonByStatus(taskLiElm) {
     if (taskArea[0].id !== "todo_area") {
         const todoButton =$('<button>').text("todo");
         taskPersonSpanElm.before(todoButton);
-        todoButton.click(changeToTodo); 
+        todoButton.click(function() {
+            const targetTaskElm = $(this).closest('li');
+            targetTaskElm.appendTo($('#todo_area'))
+            appendButtonByStatus(targetTaskElm);
+        }); 
     }
 
     if (taskArea[0].id !== "doing_area") {
         const doingButton =$('<button>').text("doing");
         taskPersonSpanElm.before(doingButton);
-        doingButton.click(changeToDoing);
+        doingButton.click(function() {
+            const targetTaskElm = $(this).closest('li');
+            targetTaskElm.appendTo($('#doing_area'));
+            appendButtonByStatus(targetTaskElm);
+        });
     }
 
     if (taskArea[0].id !== "done_area") {
         const doneButton =$('<button>').text("done");
         taskPersonSpanElm.before(doneButton);
-        doneButton.click(changeToDone);
+        doneButton.click(function() {
+            const targetTaskElm =$(this).closest('li');
+            targetTaskElm.appendTo($('#done_area'));
+            appendButtonByStatus(targetTaskElm);
+        });
     }
 
     const deleteButton =$('<button>').text("delete");
     taskPersonSpanElm.before(deleteButton)
-    deleteButton.click(deleteTask);
-}
-
-//タスクのステータスをtodoに変更する関数
-function changeToTodo() {
-    const targetTaskElm = $(this).closest('li');
-    targetTaskElm.appendTo($('#todo_area'))
-    appendButtonByStatus(targetTaskElm);
-}
-
-//タスクのステータスをdoingに変更する関数
-function changeToDoing() {
-    const targetTaskElm = $(this).closest('li');
-    targetTaskElm.appendTo($('#doing_area'));
-    appendButtonByStatus(targetTaskElm);
-}
-
-//タスクのステータスをdoneに変更する関数
-function changeToDone() {
-    const targetTaskElm =$(this).closest('li');
-    targetTaskElm.appendTo($('#done_area'));
-    appendButtonByStatus(targetTaskElm);
-}
-
-//タスクを削除する関数
-function deleteTask() {
-    const targetTaskElm = $(this).closest('li');
-    targetTaskElm.remove();
+    deleteButton.click(function() {
+        const targetTaskElm = $(this).closest('li');
+        targetTaskElm.remove();
+    });
 }
 
 //担当者をPersonListとselectboxから削除する関数
 function deletePerson() {
     const personLiElm = $(this).closest('li');
     const personId =personLiElm.data('person-id').toString()
-    personLiElm.remove();
-    $('#person_select option').each(function() {
-        const selectOptionId =$(this).val();
-        const targetPersonElm = $(this).closest('option')
-        if (selectOptionId === personId) {
-           targetPersonElm.remove()
+    $('#todo_area li, #doing_area li, #done_area li').each(function() {
+        const taskPersonId = ($(this).children("span")).data('task-person-id').toString();
+        if (personId === taskPersonId) {
+            alert('担当者に紐づくタスクがあるため担当者を削除できません')
+            return ;
         }
+        personLiElm.remove();
+        $('#person_select option').each(function() {
+            const selectOptionId =$(this).val();
+            const personOptionElm = $(this).closest('option')
+            if (selectOptionId === personId) {
+               personOptionElm.remove()
+            }
+        })
     })
 }
 
-function appendEditInput(personElm, editButton) {
-    const beforeChangePersonElm = personElm.children("span")
+function appendEditInput(personLiElm, editButton) {
+    const beforeChangePersonElm = personLiElm.children("span")
     const beforeEditPersonName = beforeChangePersonElm.text()
     if (underEditedPersonId !== undefined) {
         $('#person_list_area li').each(function() {
@@ -131,24 +126,24 @@ function appendEditInput(personElm, editButton) {
                 }
         })
     }
-    underEditedPersonId = personElm.data('person-id');
+    underEditedPersonId = personLiElm.data('person-id');
     $('<input>').attr('id', 'edit_input').val(beforeEditPersonName).replaceAll(beforeChangePersonElm)
-    const beforeChangeDeleteButton = personElm.children().last();
+    const beforeChangeDeleteButton = personLiElm.children().last();
     
     const cancelButton =$('<button>').text("cancel")
     cancelButton.replaceAll(beforeChangeDeleteButton)
     cancelButton.click(function() {
-        cancelEditPerson(beforeEditPersonName, personElm);
+        cancelEditPerson(beforeEditPersonName, personLiElm);
     })
     const saveButton =$('<button>').text("save")
     saveButton.replaceAll(editButton);
     saveButton.click(function() {
         const newPersonName = $('#edit_input').val()
-        personElm.children().remove();
-        appendPerson(newPersonName, personElm);
+        personLiElm.children().remove();
+        appendPerson(newPersonName, personLiElm);
         underEditedPersonId = undefined;
         
-        const personLiId = personElm.data('person-id').toString();
+        const personLiId = personLiElm.data('person-id').toString();
         $('#person_select option').each(function() {
             const selectPersonId = ($(this));
             if (personLiId === selectPersonId.val()) {
@@ -165,8 +160,8 @@ function appendEditInput(personElm, editButton) {
     });
 }
 
-function cancelEditPerson(beforeEditPersonName, personElm) {
-    personElm.children().remove();
-    appendPerson(beforeEditPersonName, personElm)
+function cancelEditPerson(beforeEditPersonName, personLiElm) {
+    personLiElm.children().remove();
+    appendPerson(beforeEditPersonName, personLiElm)
     underEditedPersonId = undefined;
 }
