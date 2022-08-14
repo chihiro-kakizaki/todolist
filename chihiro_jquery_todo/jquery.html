@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chihiro_jquery_todo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <h1 class="header__title">Chihiro-TODO-Jequery</h1>
+        </header>
+        <main class="main-wrapper">
+            <section class="todo-wrapper">
+                <h2 class="todo-wrapper__title">タスク管理</h2>
+                <div class="task-form">
+                    <div>
+                        <label for="task_value" class="task-form__label">新規タスク</label>
+                        <input id="task_value" class="task-form__input" type="text" placeholder="タスクを入力して下さい">
+                    </div>
+                    <div>
+                        <label for="person_select" class="task-form__label">担当者</label>
+                        <select id="person_select" class="task-form__select">
+                            <option value=1>柿崎</option>
+                            <option value=2>柴田</option>
+                            <option value=3>黒澤</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button id="task_submit" class="task-form__button--add">追加</button>
+                    </div>
+                </div>
+                <h2 class="todo-wrapper__title">Todo Tasks</h2>
+                <ul id="todo_area" class="list"></ul>
+                <h2 class="todo-wrapper__title">Doing Tasks</h2>
+                <ul id="doing_area" class="list"></ul>
+                <h2 class="todo-wrapper__title">Done Tasks</h2>
+                <ul id="done_area" class="list"></ul>
+            </section>
+            <section class="person-wrapper">
+                <h2 class="person-wrapper__title">担当者管理</h2>
+                <div class="person-form">
+                    <div>
+                        <label for="person_name" class="person-form__label">新規担当者</label>
+                        <input id="person_name" class="person-form__input" type="text" placeholder="担当者を入力して下さい">
+                    </div>
+                    <div>
+                        <button id="person_submit" class="person-form__button--add">追加</button>
+                    </div>
+                </div>
+                <h2 class="person-wrapper__title">Person List</h2>
+                <ul id="person_list_area" class="list"></ul>
+            </section>
+        </main>
+    </div>
+    <script src="jquery.js"></script>
+</body>
+</html>

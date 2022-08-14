@@ -1,0 +1,241 @@
+// sass/style.scss
+@use "sass:map";
+@mixin h2-title {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+@mixin button {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+}
+
+@mixin  button-add-size {
+  width: 60px;
+  height: 35px;
+}
+
+@mixin list {
+  background: #eeeeee;
+  min-height: 155px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+
+@mixin label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+@mixin input-or-select {
+  display: block;
+  height: 35px;
+  width: 100%;
+}
+
+@mixin break-all {
+  word-break: break-all;
+  margin: auto 0;
+}
+
+body {
+  color: #555555;
+
+  .wrapper {
+    padding: 50px;
+  }
+
+  .header {
+    padding-bottom: 20px;    
+    
+    &__title {
+      font-size: 45px;
+      font-weight: bold;
+      border-bottom: medium solid gray;
+    }
+  }
+
+  .main-wrapper {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+
+    .todo-wrapper {
+      padding-top: 10px;
+
+      &__title {
+        @include h2-title;
+      }
+
+      .task-form {
+        display: grid;
+        grid-template-columns: 200px 100px 1fr;
+        grid-column-gap: 10px;
+        margin-bottom: 30px;
+        padding-top: 10px;
+
+        div {
+          margin: auto 0 0 0;
+        }
+
+        &__label {
+          @include label;
+        }
+
+        &__input, &__select {
+          @include input-or-select;
+        }
+
+        &__button {
+
+          &--add {
+            @include button;
+            @include button-add-size;
+            background: #5D99FF;
+          }
+          &--add:hover {
+            @include button;
+            @include button-add-size;
+            background:#A4C6FF;
+          }
+        }
+      }
+
+      .list {
+        @include list;
+        
+        &__task-item {
+          display: grid;
+          grid-template-columns: 250px 1fr 1fr 1fr 100px;
+          grid-column-gap: 10px;
+          margin-bottom: 15px;
+
+          &--break-all {
+            @include break-all;
+            display: block;
+          }
+        }
+        
+        &__button {
+          &--add {
+            @include button;
+            background: #666666;
+          }
+          &--add:hover {
+            @include button;
+            background: #aaaaaa;
+          }
+          &--delete {
+            @include button;
+            background:#ea5550;
+          }
+          &--delete:hover {
+            @include button;
+            background:#FA8072;
+          }
+        }
+      }
+    }
+
+    .person-wrapper {
+      width: 500px;
+      padding-top: 10px;
+
+      &__title {
+        @include h2-title;
+      }
+
+      .person-form {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        grid-column-gap: 10px;
+        margin-bottom: 30px;
+        padding-top: 10px;
+
+        div {
+          margin: auto 0 0 0;
+        }
+
+        &__label {
+          @include label;
+        }
+
+        &__input {
+          @include input-or-select;
+        }
+
+        &__button {
+          &--add {
+            @include button;
+            @include button-add-size;
+            background: #5D99FF;
+          }
+          &--add:hover {
+            @include button;
+            @include button-add-size;
+            background:#A4C6FF;
+          }
+        }
+      }
+      
+      .list {
+        @include list;
+
+        &__person-item {
+          display: grid;
+          grid-template-columns: 250px 1fr 1fr;
+          grid-column-gap: 10px;
+          margin-bottom: 10px;
+          
+          &--break-all {
+            @include break-all;
+          }
+        }
+
+        &__button {
+          &--edit {
+            @include button;
+            background: #00ac97;
+          }
+          &--edit:hover {
+            @include button;
+            background: #66cdaa;
+          }
+          &--delete {
+            @include button;
+            background:#ea5550;
+          }
+          &--delete:hover {
+            @include button;
+            background:#FA8072;
+          }
+          &--cancel {
+            @include button;
+            background: #666666;
+          }
+          &--cancel:hover {
+            @include button;
+            background: #aaaaaa;
+          }
+          &--save {
+            @include button;
+            background: #5D99FF;
+          }
+          &--save:hover {
+            @include button;
+            background:#A4C6FF;
+          }
+        }
+      }
+    }
+  }
+}

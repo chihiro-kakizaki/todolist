@@ -4,9 +4,11 @@ let underEditedPersonId = undefined;
 $(function () {
     $('#task_submit').click(function() {
         if($('#task_value').val() === '') return;
-        const taskLiElm =$('<li>').text($('#task_value').val()); 
+        const taskLiElm =$('<li>').addClass('list__task-item')
+        const taskLiDivElm = $('<div>').addClass('list__task-item--break-all').text($('#task_value').val()); 
+        taskLiDivElm.appendTo(taskLiElm);
         taskLiElm.appendTo($('#todo_area'));
-        const taskPersonSpanElm =$('<span data-task-person-id= '+ $('#person_select option:selected').val() +' >').text($('#person_select option:selected').text());
+        const taskPersonSpanElm =$('<span data-task-person-id= '+ $('#person_select option:selected').val() +' >').addClass('list__task-item--break-all').text($('#person_select option:selected').text());
         taskPersonSpanElm.appendTo(taskLiElm);
         appendButtonByStatus(taskLiElm);
         $('#task_value').val("");
@@ -32,19 +34,19 @@ $(function() {
 });
 
 function appendNewPerson(personName, personId) {
-    const newPersonLiElm =$('<li data-person-id= '+ personId +'>')
+    const newPersonLiElm =$('<li data-person-id= '+ personId +'>').addClass('list__person-item')
     newPersonLiElm.appendTo($('#person_list_area'))
     appendPerson(personName,newPersonLiElm)
 }
 
 function appendPerson(personName,personLiElm) {
-    $('<span>').text(personName).appendTo(personLiElm);
-    const editButton =$('<button>').text("edit");
+    $('<span>').addClass('list__person-item--break-all').text(personName).appendTo(personLiElm);
+    const editButton =$('<button>').addClass('list__button--edit').text("編集");
     editButton.appendTo(personLiElm);
     editButton.click(function() {
         appendEditInput(personLiElm,editButton);
     })
-    const deleteButton =$('<button>').text("delete");
+    const deleteButton =$('<button>').addClass('list__button--delete').text("削除");
     deleteButton.appendTo(personLiElm);
     deleteButton.click(deletePerson);
 }
@@ -57,7 +59,7 @@ function appendButtonByStatus(taskLiElm) {
     const taskArea = $(taskLiElm).closest('ul')
 
     if (taskArea[0].id !== "todo_area") {
-        const todoButton =$('<button>').text("todo");
+        const todoButton =$('<button>').addClass('list__button--add').text("todo");
         taskPersonSpanElm.before(todoButton);
         todoButton.click(function() {
             const targetTaskElm = $(this).closest('li');
@@ -67,7 +69,7 @@ function appendButtonByStatus(taskLiElm) {
     }
 
     if (taskArea[0].id !== "doing_area") {
-        const doingButton =$('<button>').text("doing");
+        const doingButton =$('<button>').addClass('list__button--add').text("doing");
         taskPersonSpanElm.before(doingButton);
         doingButton.click(function() {
             const targetTaskElm = $(this).closest('li');
@@ -77,7 +79,7 @@ function appendButtonByStatus(taskLiElm) {
     }
 
     if (taskArea[0].id !== "done_area") {
-        const doneButton =$('<button>').text("done");
+        const doneButton =$('<button>').addClass('list__button--add').text("done");
         taskPersonSpanElm.before(doneButton);
         doneButton.click(function() {
             const targetTaskElm =$(this).closest('li');
@@ -86,7 +88,7 @@ function appendButtonByStatus(taskLiElm) {
         });
     }
 
-    const deleteButton =$('<button>').text("delete");
+    const deleteButton =$('<button>').addClass('list__button--delete').text("削除");
     taskPersonSpanElm.before(deleteButton)
     deleteButton.click(function() {
         const targetTaskElm = $(this).closest('li');
@@ -130,12 +132,12 @@ function appendEditInput(personLiElm, editButton) {
     $('<input>').attr('id', 'edit_input').val(beforeEditPersonName).replaceAll(beforeChangePersonElm)
     const beforeChangeDeleteButton = personLiElm.children().last();
     
-    const cancelButton =$('<button>').text("cancel")
+    const cancelButton =$('<button>').addClass('list__button--cancel').text("キャンセル")
     cancelButton.replaceAll(beforeChangeDeleteButton)
     cancelButton.click(function() {
         cancelEditPerson(beforeEditPersonName, personLiElm);
     })
-    const saveButton =$('<button>').text("save")
+    const saveButton =$('<button>').addClass('list__button--save').text("保存")
     saveButton.replaceAll(editButton);
     saveButton.click(function() {
         const newPersonName = $('#edit_input').val()
