@@ -1,16 +1,295 @@
-ul {
-  margin: 10;
-  padding: 10;
+body {
+  color: #555555;
 }
-ul li {
-  display: inline-block;
+body .wrapper {
+  padding: 50px;
 }
-ul li a {
+body .header {
+  padding-bottom: 20px;
+}
+body .header__title {
+  font-size: 45px;
+  font-weight: bold;
+  border-bottom: medium solid gray;
+}
+body .main-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+}
+body .main-wrapper .todo-wrapper {
+  padding-top: 10px;
+}
+body .main-wrapper .todo-wrapper__title {
+  font-size: 25px;
+  font-weight: 600;
+}
+body .main-wrapper .todo-wrapper .task-form {
+  display: grid;
+  grid-template-columns: 200px 100px 1fr;
+  grid-column-gap: 10px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+}
+body .main-wrapper .todo-wrapper .task-form div {
+  margin: auto 0 0 0;
+}
+body .main-wrapper .todo-wrapper .task-form__label {
   display: block;
-  padding: 6px 12px;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
 }
-ul li a:hover {
-  color: #666;
+body .main-wrapper .todo-wrapper .task-form__input, body .main-wrapper .todo-wrapper .task-form__select {
+  display: block;
+  height: 35px;
+  width: 100%;
+}
+body .main-wrapper .todo-wrapper .task-form__button--add {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  width: 60px;
+  height: 35px;
+  background: #5D99FF;
+}
+body .main-wrapper .todo-wrapper .task-form__button--add:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  width: 60px;
+  height: 35px;
+  background: #A4C6FF;
+}
+body .main-wrapper .todo-wrapper .list {
+  background: #eeeeee;
+  min-height: 155px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+body .main-wrapper .todo-wrapper .list__task-item {
+  display: grid;
+  grid-template-columns: 250px 1fr 1fr 1fr 100px;
+  grid-column-gap: 10px;
+  margin-bottom: 15px;
+}
+body .main-wrapper .todo-wrapper .list__task-item div, body .main-wrapper .todo-wrapper .list__task-item span {
+  word-break: break-all;
+  margin: auto 0;
+  display: block;
+}
+body .main-wrapper .todo-wrapper .list__button--add {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #666666;
+}
+body .main-wrapper .todo-wrapper .list__button--add:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #aaaaaa;
+}
+body .main-wrapper .todo-wrapper .list__button--delete {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #ea5550;
+}
+body .main-wrapper .todo-wrapper .list__button--delete:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #FA8072;
+}
+body .main-wrapper .person-wrapper {
+  width: 500px;
+  padding-top: 10px;
+}
+body .main-wrapper .person-wrapper__title {
+  font-size: 25px;
+  font-weight: 600;
+}
+body .main-wrapper .person-wrapper .person-form {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-column-gap: 10px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+}
+body .main-wrapper .person-wrapper .person-form div {
+  margin: auto 0 0 0;
+}
+body .main-wrapper .person-wrapper .person-form__label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+body .main-wrapper .person-wrapper .person-form__input {
+  display: block;
+  height: 35px;
+  width: 100%;
+}
+body .main-wrapper .person-wrapper .person-form__button--add {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  width: 60px;
+  height: 35px;
+  background: #5D99FF;
+}
+body .main-wrapper .person-wrapper .person-form__button--add:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  width: 60px;
+  height: 35px;
+  background: #A4C6FF;
+}
+body .main-wrapper .person-wrapper .list {
+  background: #eeeeee;
+  min-height: 155px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+body .main-wrapper .person-wrapper .list__person-item {
+  display: grid;
+  grid-template-columns: 250px 1fr 1fr;
+  grid-column-gap: 10px;
+  margin-bottom: 10px;
+}
+body .main-wrapper .person-wrapper .list__person-item--break-all {
+  word-break: break-all;
+  margin: auto 0;
+}
+body .main-wrapper .person-wrapper .list__button--edit {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #00ac97;
+}
+body .main-wrapper .person-wrapper .list__button--edit:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #66cdaa;
+}
+body .main-wrapper .person-wrapper .list__button--delete {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #ea5550;
+}
+body .main-wrapper .person-wrapper .list__button--delete:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #FA8072;
+}
+body .main-wrapper .person-wrapper .list__button--cancel {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #666666;
+}
+body .main-wrapper .person-wrapper .list__button--cancel:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #aaaaaa;
+}
+body .main-wrapper .person-wrapper .list__button--save {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #5D99FF;
+}
+body .main-wrapper .person-wrapper .list__button--save:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  border: none;
+  width: 95px;
+  height: 30px;
+  border-radius: 0.3rem;
+  padding: 5px 10px;
+  margin: auto 0;
+  background: #A4C6FF;
 }
 
 /*# sourceMappingURL=style.css.map */
